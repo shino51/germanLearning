@@ -36,6 +36,6 @@ build/
 .DS_Store
 
 ### generated output files ###
-output/
-input/
+dictation_resolver/output/
+dictation_resolver/input/
 .venv/

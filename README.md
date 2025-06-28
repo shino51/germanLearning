@@ -1,2 +1,7 @@
-##  ドイツ語勉強用のレポ
+#  ドイツ語勉強用のレポジトリー
 
+## Reading alltagsdeutsch URLs
+alltagsdeutsch (DW) のURLとタイトルをarchiveのURLから、google sheet のフォーマットに沿った形に出力するように取得します 
+
+## Dictation Resolver
+[README](./dictation_resolver/README.md)
