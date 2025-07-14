@@ -1,0 +1,29 @@
+{
+  "manifest_version": 3,
+  "name": "German Dictionary Quick Search",
+  "version": "1.0",
+  "description": "Quickly search selected German words using LEO, DWDS, or Wadoku by pressing Control + shortcut keys.",
+  "permissions": ["scripting", "storage"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_icon": {
+      "16": "icons/icon_on_16.png",
+      "48": "icons/icon_on_48.png",
+      "128": "icons/icon_on_128.png"
+    },
+    "default_title": "Toggle Dictionary Search"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"]
+    }
+  ],
+  "icons": {
+    "16": "icons/icon_on_16.png",
+    "48": "icons/icon_on_48.png",
+    "128": "icons/icon_on_128.png"
+  }
+}
