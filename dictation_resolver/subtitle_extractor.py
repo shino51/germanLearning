@@ -5,6 +5,7 @@ from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 import time
+import configparser
 
 
 def fetch_tagesschau_transcript(tagesschau_untertitel_xml_url, output_file="input/reference.txt"):
@@ -63,10 +64,14 @@ def fetch_topthema_transcript(url, output_file="input/reference.txt"):
 
 
 if __name__ == "__main__":
+    # read config
+    config = configparser.ConfigParser()
+    config.read('config.ini')
+
     # ▼ 使用例：取得済みの字幕XMLのURLを指定
-    # tagesschau_untertitel_xml_url = "https://www.tagesschau.de/multimedia/sendung/tagesschau_20_uhr/untertitel-74704.xml"
+    # tagesschau_untertitel_xml_url = config['TAGESSCHAU']['untertitel.url']
     # fetch_tagesschau_transcript(tagesschau_untertitel_xml_url)
 
-    url = "https://learngerman.dw.com/de/kaffee-trinken-f%C3%BCr-die-gesundheit/l-72970964/lm"
+    url = title = config['TOP_THEMA']['url']
     fetch_topthema_transcript(url)
 

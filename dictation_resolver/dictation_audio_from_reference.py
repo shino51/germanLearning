@@ -2,6 +2,7 @@ import os
 import difflib
 import shutil
 import whisper
+import configparser
 from pydub import AudioSegment
 
 
@@ -87,6 +88,9 @@ def split_audio_with_whisper(title):
 
 
 if __name__ == "__main__":
-    title = "kaffe_drinken"
+    # read config
+    config = configparser.ConfigParser()
+    config.read('config.ini')
+    title = config['TOP_THEMA']['title']
     split_audio_with_whisper(title)
 

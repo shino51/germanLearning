@@ -1,3 +1,4 @@
+import configparser
 import os
 import shutil
 import whisper
@@ -66,5 +67,9 @@ def split_audio_and_generate_transcript(title):
 
 
 if __name__ == "__main__":
-    title = "kaffe_drinken"
+    # read config
+    config = configparser.ConfigParser()
+    config.read('config.ini')
+    title = config['TOP_THEMA']['title']
+
     split_audio_and_generate_transcript(title)
