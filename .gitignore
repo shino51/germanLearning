@@ -39,3 +39,6 @@ build/
 dictation_resolver/output/
 dictation_resolver/input/
 .venv/
+
+# ignore config.ini
+dictation_resolver/config.ini
