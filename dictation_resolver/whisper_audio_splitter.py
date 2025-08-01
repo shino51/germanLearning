@@ -59,7 +59,7 @@ def split_audio_and_generate_transcript(title):
 
             # 音声切り出し + 無音追加
             clip = silence + audio[start_ms:end_ms]
-            audio_filename = f"sentence_{i+1:03d}.mp3"
+            audio_filename = f"sentence_{i:03d}.mp3"
             clip.export(os.path.join(output_dir, audio_filename), format="mp3")
 
             # スクリプト出力

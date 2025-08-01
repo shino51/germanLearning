@@ -15,7 +15,7 @@ def add_todo_for_notion(script_path):
 if __name__ == "__main__":
     # read config
     config = configparser.ConfigParser()
-    config.read('config.ini')
+    config.read('../config.ini')
     title = config['TOP_THEMA']['title']
 
     script_location = f"../output/{title}/script.txt"

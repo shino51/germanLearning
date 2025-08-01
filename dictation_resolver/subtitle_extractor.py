@@ -72,6 +72,6 @@ if __name__ == "__main__":
     # tagesschau_untertitel_xml_url = config['TAGESSCHAU']['untertitel.url']
     # fetch_tagesschau_transcript(tagesschau_untertitel_xml_url)
 
-    url = title = config['TOP_THEMA']['url']
+    url = config['TOP_THEMA']['url'].rstrip("/") + "/lm"
     fetch_topthema_transcript(url)
 
