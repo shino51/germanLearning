@@ -7,13 +7,7 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 
 
-def download_topthema_audio(config_path="config.ini", output_folder="input/audio"):
-    # -- config.ini から URL とタイトルを取得 --
-    config = configparser.ConfigParser()
-    config.read(config_path, encoding="utf-8")
-    url = config["TOP_THEMA"]["url"].rstrip("/")
-    title = config["TOP_THEMA"]["title"]
-
+def download_topthema_audio(title_: str, url_: str, output_folder="input/audio"):
     # -- Seleniumの設定 --
     options = Options()
     options.add_argument('--headless')
@@ -21,7 +15,7 @@ def download_topthema_audio(config_path="config.ini", output_folder="input/audio
 
     try:
         # leページにアクセス
-        le_url = url + "/le"
+        le_url = url_.strip("/") + "/le"
         driver.get(le_url)
         time.sleep(5)  # JSの読み込み待機
 
@@ -35,7 +29,7 @@ def download_topthema_audio(config_path="config.ini", output_folder="input/audio
         audio_url = mp3_links[0]  # 最初のmp3リンクを使用
 
         # ファイル名として使えない文字を除去
-        safe_title = "".join(c for c in title if c.isalnum() or c in " _-").rstrip()
+        safe_title = "".join(c for c in title_ if c.isalnum() or c in " _-").rstrip()
         os.makedirs(output_folder, exist_ok=True)
         output_path = os.path.join(output_folder, f"{safe_title}.mp3")
 
@@ -54,4 +48,10 @@ def download_topthema_audio(config_path="config.ini", output_folder="input/audio
 
 
 if __name__ == "__main__":
-    download_topthema_audio()
+    # read config
+    config = configparser.ConfigParser()
+    config.read('config.ini')
+    title = config['TOP_THEMA']['title']
+    url = config['TOP_THEMA']['url']
+
+    download_topthema_audio(title, url)

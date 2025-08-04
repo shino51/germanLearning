@@ -3,8 +3,35 @@
 このプロジェクトは、ドイツ語学習者向けに **ディクテーション（書き取り）やシャドーイング** のための音声・スクリプト教材を自動生成するツールです。特に `Tagesschau` や `DW Top Thema` などのニュース素材を対象とし、以下の3つの主要機能を提供します：
 
 ---
+## 1. DW Top Thema 音声ダウンローダー（`audio_downloader.py`）
 
-## 📌 1. Whisper 音声スプリッター（音声からスクリプトと区切り音声を生成）
+### 🔧 スクリプト
+[audio_downloader.py](audio_downloader.py)
+
+### ✅ 機能
+- Top Thema ページから JavaScript を実行して音声ファイルリンクを取得（Selenium 使用）
+- 音声（MP3）を `input/audio/` に保存（`config.ini` で指定したタイトルで保存）
+
+---
+
+### 📁 入力設定
+
+以下のような構成の `config.ini` を用意してください：
+
+```ini
+[TOP_THEMA]
+url = https://learngerman.dw.com/de/handy-aus-offline-sein-ist-im-trend/l-72709529
+title = handy-aus-offline-sein
+```
+
+### 📂 出力例
+- input/audio/handy-aus-offline-sein.mp3
+　⇨ ダウンロードされた音声ファイル
+
+### 💡 備考
+Selenium を使って JavaScript 実行後の DOM から音声リンクを取得します。
+
+## 📌 2. Whisper 音声スプリッター（音声からスクリプトと区切り音声を生成）
 
 ### 🔧 スクリプト
 [whisper_audio_splitter.py](whisper_audio_splitter.py)
@@ -25,32 +52,6 @@
 
 ### 📌 注意点
 Whisper の文字起こしには正確でない箇所が含まれているので、[字幕ファイルの抽出](#3-字幕ファイル抽出)を同時に行い、出力されたスクリプトと公式のスクリプトを比べて直しておくべき
-
----
-
-## 📌 2. 公式スクリプトベースの音声切り出し（字幕と音声をマッチ）
-
-### 🔧 スクリプト
-[dictation_audio_from_reference.py](dictation_audio_from_reference.py)
-
-### ✅ 機能
-- Whisper でタイムスタンプを取得
-- 公式のスクリプト (`script.txt`) とマッチング
-- 類似度が低い行は `unmatched.txt` に記録
-- マッチした文に対応する音声のみを切り出して保存
-- 切り出した音声の先頭に 0.5 秒の無音を追加
-
-### 🗂️ 入力
-ダウンロードする際、タイトルをつける
-- `input/audio/{title}.mp3`
-- `input/reference.txt`（1文1行、すでに整形済み）
-
-成形済みのreferenceを取得するためには、先に [字幕ファイルの抽出](#3-字幕ファイル抽出)をやっておくべき
-
-### 📁 出力
-- `output/{title}/001.mp3`, ...
-- `output/{title}/000.script.txt`
-- `output/{title}/000.unmatched.txt`
 
 ---
 

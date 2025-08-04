@@ -7,12 +7,12 @@ import nltk
 from nltk.tokenize import sent_tokenize
 
 
-def split_audio_and_generate_transcript(title):
+def split_audio_and_generate_transcript(title_: str):
     nltk.download("punkt")
     # --- 設定 ---
     # 入力ファイル
-    input_file = f"input/audio/{title}.mp3"
-    output_dir = f"output/{title}"
+    input_file = f"input/audio/{title_}.mp3"
+    output_dir = f"output/{title_}"
     script_file = "script.txt"
     silence_duration = 500  # 無音（ms）
 
