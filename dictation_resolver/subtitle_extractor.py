@@ -24,7 +24,7 @@ def fetch_topthema_transcript(url_: str, output_file="input/reference.txt"):
 
     paragraphs = article_div.find_all("p")
     script_text = "\n".join(p.text.strip() for p in paragraphs if p.text.strip())
-    script_sentences = re.split(r"(?<=[.?\n!])\s+", script_text.strip())
+    script_sentences = re.split(r"(?<=[.:?\n!])\s+", script_text.strip())
 
     with open(output_file, "w", encoding="utf-8") as f:
         for i, sentence in enumerate(script_sentences, 1):
